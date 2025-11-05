@@ -1,13 +1,19 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+pub const ORIGIN: Point = Point::new(0, 0);
+pub const UP: Point = Point::new(0, -1);
+pub const RIGHT: Point = Point::new(1, 0);
+pub const DOWN: Point = Point::new(0, 1);
+pub const LEFT: Point = Point::new(-1, 0);
+
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
 pub struct Point {
     pub x: i32,
     pub y: i32,
 }
 
 impl Point {
-    pub fn new(x: i32, y: i32) -> Self {
+    pub const fn new(x: i32, y: i32) -> Self {
         Self { x, y }
     }
 }

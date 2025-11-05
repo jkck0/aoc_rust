@@ -8,20 +8,14 @@ struct Problem {
 }
 
 fn main() {
-    let Some(arg) = args().nth(1) else {
-        println!("no day provided");
-        return;
+    let day = match args().nth(1) {
+        Some(day) => day.parse().ok(),
+        None => None,
     };
-    let Ok(day) = arg.parse::<u32>() else {
-        println!("invalid day number \"{arg}\"");
-        return;
-    };
-    if !(1..=25).contains(&day) {
-        println!("day number must be between 1 and 25");
-        return;
-    }
 
-    let problems = problems().into_iter().filter(|p| p.day == day);
+    let problems = problems()
+        .into_iter()
+        .filter(|p| day.is_none() || p.day == day.unwrap());
 
     for problem in problems {
         let Problem { day, func } = problem;
@@ -35,6 +29,7 @@ fn main() {
         println!("Day {day}");
         println!("Part 1: {part1}");
         println!("Part 2: {part2}");
+        println!()
     }
 }
 

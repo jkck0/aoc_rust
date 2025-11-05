@@ -79,4 +79,4 @@ macro_rules! gen_problems {
     }
 }
 
-gen_problems!(day01, day02, day03);
+gen_problems!(day01, day02, day03, day04);

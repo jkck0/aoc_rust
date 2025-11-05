@@ -21,9 +21,7 @@ fn main() {
         return;
     }
 
-    let problems = problems()
-        .into_iter()
-        .filter(|p| p.day == day);
+    let problems = problems().into_iter().filter(|p| p.day == day);
 
     for problem in problems {
         let Problem { day, func } = problem;
@@ -37,7 +35,7 @@ fn main() {
         println!("Day {day}");
         println!("Part 1: {part1}");
         println!("Part 2: {part2}");
-    }   
+    }
 }
 
 // parse out the number from a day module
@@ -45,7 +43,9 @@ fn main() {
 fn parse_day_num(day: &str) -> u32 {
     let mut chars = day.bytes();
     let mut n: u32 = loop {
-        let char = chars.next().unwrap_or_else(|| panic!("cannot parse day number from module `{day}`"));
+        let char = chars
+            .next()
+            .unwrap_or_else(|| panic!("cannot parse day number from module `{day}`"));
         if char >= b'0' && char <= b'9' {
             break (char - b'0').into();
         }

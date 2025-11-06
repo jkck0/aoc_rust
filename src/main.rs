@@ -8,10 +8,7 @@ struct Problem {
 }
 
 fn main() {
-    let day = match args().nth(1) {
-        Some(day) => day.parse().ok(),
-        None => None,
-    };
+    let day = args().nth(1).and_then(|day| day.parse().ok());
 
     let problems = problems()
         .into_iter()

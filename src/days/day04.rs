@@ -73,6 +73,7 @@ fn worker(state: Arc<State>) {
             let hash = format!("{:x}", md5::compute(state.key.clone() + &x.to_string()));
             if count_zeroes(&hash) >= state.zeroes {
                 state.answer.store(x, Ordering::Relaxed);
+                return;
             }
         }
     }

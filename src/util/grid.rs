@@ -2,7 +2,7 @@ use std::ops::{Index, IndexMut};
 
 use crate::util::point::Point;
 
-struct Grid<T> {
+pub struct Grid<T> {
     width: usize,
     height: usize,
     data: Vec<T>,

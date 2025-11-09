@@ -1,4 +1,7 @@
-use std::ops::{Add, AddAssign, Sub, SubAssign};
+use std::{
+    ops::{Add, AddAssign, Sub, SubAssign},
+    str::FromStr,
+};
 
 pub const ORIGIN: Point = Point::new(0, 0);
 pub const UP: Point = Point::new(0, -1);
@@ -45,5 +48,27 @@ impl SubAssign for Point {
     fn sub_assign(&mut self, rhs: Self) {
         self.x -= rhs.x;
         self.y -= rhs.y;
+    }
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct ParsePointError;
+
+// Parse a Point from a string representation like "x,y"
+impl FromStr for Point {
+    type Err = ParsePointError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let (x, y) = s
+            .split_once(",")
+            .ok_or_else(|| ParsePointError)
+            .map(|(x, y)| {
+                Ok((
+                    x.parse().map_err(|_| ParsePointError)?,
+                    y.parse().map_err(|_| ParsePointError)?,
+                ))
+            })??;
+
+        Ok(Point { x: x, y: y })
     }
 }

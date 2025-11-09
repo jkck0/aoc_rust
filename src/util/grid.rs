@@ -16,6 +16,10 @@ impl<T: Copy> Grid<T> {
             data: vec![value; width * height],
         }
     }
+
+    pub fn raw(&self) -> &[T] {
+        &self.data
+    }
 }
 
 impl<T> Index<Point> for Grid<T> {

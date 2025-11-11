@@ -17,6 +17,14 @@ impl<T: Copy> Grid<T> {
         }
     }
 
+    pub fn width(&self) -> usize {
+        self.width
+    }
+
+    pub fn height(&self) -> usize {
+        self.height
+    }
+
     pub fn raw(&self) -> &[T] {
         &self.data
     }

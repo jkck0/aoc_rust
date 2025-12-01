@@ -13,8 +13,11 @@ fn main() {
     let year = args.nth(1).and_then(|year| year.parse().ok());
     let day = args.next().and_then(|day| day.parse().ok());
 
-    let problems = problems()
+    let problems = vec![year2015()];
+
+    let problems = problems
         .into_iter()
+        .flatten()
         .filter(|p| year.is_none() || p.year == year.unwrap())
         .filter(|p| day.is_none() || p.day == day.unwrap());
 
@@ -61,7 +64,7 @@ fn parse_mod_num(module: &str) -> u32 {
 
 macro_rules! gen_problems {
     ($year:tt $($day:tt),*) => {
-        fn problems() -> Vec<Problem> {
+        fn $year() -> Vec<Problem> {
             vec![$(
                 Problem {
                     year: parse_mod_num(stringify!($year)),

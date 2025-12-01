@@ -14,7 +14,7 @@ impl Present {
             2 * (self.1 + self.2),
         ];
         perimeters.sort_unstable();
-        
+
         let bow = self.0 * self.1 * self.2;
         perimeters[0] + bow
     }

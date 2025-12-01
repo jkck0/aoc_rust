@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "aoc2015"
+name = "aoc_rust"
 version = "0.1.0"
 dependencies = [
  "itertools",

@@ -13,7 +13,7 @@ fn main() {
     let year = args.nth(1).and_then(|year| year.parse().ok());
     let day = args.next().and_then(|day| day.parse().ok());
 
-    let problems = vec![year2015()];
+    let problems = vec![year2015(), year2025()];
 
     let problems = problems
         .into_iter()
@@ -87,4 +87,9 @@ macro_rules! gen_problems {
 gen_problems!(
     year2015
     day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
+);
+
+gen_problems!(
+    year2025
+    day01
 );

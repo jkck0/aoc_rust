@@ -43,3 +43,36 @@ impl<T> IndexMut<Point> for Grid<T> {
         &mut self.data[(point.x + point.y * self.width as i32) as usize]
     }
 }
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct ParseGridError;
+impl Grid<u8> {
+    pub fn parse(s: &str) -> Result<Self, ParseGridError> {
+        let lines = s.lines().collect::<Vec<_>>();
+        let width = lines[0].len();
+        let height = lines.len();
+
+        for i in 1..lines.len() {
+            if lines[i].len() != width {
+                return Err(ParseGridError);
+            }
+        }
+
+        let data = lines.join("").bytes().collect();
+        Ok(Grid {
+            width,
+            height,
+            data,
+        })
+    }
+}
+
+impl<T: Clone> Clone for Grid<T> {
+    fn clone(&self) -> Self {
+        Grid {
+            width: self.width,
+            height: self.height,
+            data: self.data.clone(),
+        }
+    }
+}

@@ -4,9 +4,9 @@ use std::{
 };
 
 pub const ORIGIN: Point = Point::new(0, 0);
-pub const UP: Point = Point::new(0, -1);
+pub const UP: Point = Point::new(0, 1);
 pub const RIGHT: Point = Point::new(1, 0);
-pub const DOWN: Point = Point::new(0, 1);
+pub const DOWN: Point = Point::new(0, -1);
 pub const LEFT: Point = Point::new(-1, 0);
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]

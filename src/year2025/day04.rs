@@ -17,30 +17,30 @@ fn available_directions(width: usize, height: usize, x: usize, y: usize) -> Vec<
 
     // cardinal directions
     if up {
-        directions.push(UP)
+        directions.push(UP);
     }
     if right {
-        directions.push(RIGHT)
+        directions.push(RIGHT);
     }
     if down {
-        directions.push(DOWN)
+        directions.push(DOWN);
     }
     if left {
-        directions.push(LEFT)
+        directions.push(LEFT);
     }
 
     // diagonals
     if up && left {
-        directions.push(UP + LEFT)
+        directions.push(UP + LEFT);
     }
     if up && right {
-        directions.push(UP + RIGHT)
+        directions.push(UP + RIGHT);
     }
     if down && right {
-        directions.push(DOWN + RIGHT)
+        directions.push(DOWN + RIGHT);
     }
     if down && left {
-        directions.push(DOWN + LEFT)
+        directions.push(DOWN + LEFT);
     }
 
     directions
@@ -115,11 +115,11 @@ pub fn part2(grid: &Grid<u8>) -> u32 {
                     )
                     .into_iter()
                     .map(|d| pos + d),
-                )
+                );
             }
         }
 
-        to_check = new_check
+        to_check = new_check;
     }
 
     accessible

@@ -76,33 +76,50 @@ pub fn part2(grid: &Grid<u8>) -> u32 {
     let mut grid = grid.clone();
     let mut accessible = 0;
 
-    loop {
-        let mut changed = 0;
-        for x in 0..grid.width() {
-            for y in 0..grid.height() {
-                let pos = Point::new(x as i32, y as i32);
-                if grid[pos] != b'@' {
-                    continue;
-                }
+    // check all of the rolls the first time
+    let mut to_check = Vec::with_capacity(grid.width() * grid.height());
+    for x in 0..grid.width() {
+        for y in 0..grid.height() {
+            to_check.push(Point::new(x as i32, y as i32));
+        }
+    }
 
-                let mut neighbours = 0;
-                for dir in available_directions(grid.width(), grid.height(), x, y) {
-                    if grid[pos + dir] == b'@' {
-                        neighbours += 1;
-                    }
-                }
+    while to_check.len() > 0 {
+        let mut new_check = vec![];
 
-                if neighbours < 4 {
-                    grid[pos] = b'.';
-                    changed += 1;
+        for pos in to_check {
+            if grid[pos] != b'@' {
+                continue;
+            }
+
+            let mut neighbours = 0;
+            for dir in
+                available_directions(grid.width(), grid.height(), pos.x as usize, pos.y as usize)
+            {
+                if grid[pos + dir] == b'@' {
+                    neighbours += 1;
                 }
+            }
+
+            // if the roll was removed, add all its neighbours to be check next iteration
+            if neighbours < 4 {
+                grid[pos] = b'.';
+                accessible += 1;
+
+                new_check.extend(
+                    available_directions(
+                        grid.width(),
+                        grid.height(),
+                        pos.x as usize,
+                        pos.y as usize,
+                    )
+                    .into_iter()
+                    .map(|d| pos + d),
+                )
             }
         }
 
-        accessible += changed;
-        if changed == 0 {
-            break;
-        }
+        to_check = new_check
     }
 
     accessible

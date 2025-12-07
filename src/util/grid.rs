@@ -76,3 +76,15 @@ impl<T: Clone> Clone for Grid<T> {
         }
     }
 }
+
+impl<T> Grid<T>
+where
+    T: Eq + PartialEq,
+{
+    pub fn position(&self, elem: T) -> Option<Point> {
+        self.data
+            .iter()
+            .position(|e| *e == elem)
+            .map(|idx| Point::new((idx % self.width) as i32, (idx / self.width) as i32))
+    }
+}

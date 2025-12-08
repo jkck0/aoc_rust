@@ -1,4 +1,5 @@
 pub mod util {
+    pub mod disjoint_set;
     pub mod grid;
     pub mod point;
 }

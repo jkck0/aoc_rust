@@ -1,6 +1,6 @@
 use std::cmp::{max, min};
 
-use crate::util::point::{Point, RIGHT};
+use crate::util::point::Point;
 
 pub fn parse(data: &str) -> Vec<Point> {
     data.lines()
